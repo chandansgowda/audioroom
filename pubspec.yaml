@@ -40,6 +40,8 @@ dependencies:
   cloud_firestore: ^4.4.5
   get: ^4.6.5
   livekit_client: ^1.2.1
+  http: ^0.13.5
+  dart_jsonwebtoken: ^2.7.1
 
 dev_dependencies:
   flutter_test:

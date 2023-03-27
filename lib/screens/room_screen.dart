@@ -1,7 +1,7 @@
+import 'package:audioroom/services/api_service.dart';
 import 'package:flutter/material.dart';
 
 class SingleRoomScreen extends StatelessWidget {
-  const SingleRoomScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
