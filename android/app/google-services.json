@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182481427521",
+    "project_id": "audioroom-a3dc4",
+    "storage_bucket": "audioroom-a3dc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182481427521:android:5c97d71e46c1604e6d3ac0",
+        "android_client_info": {
+          "package_name": "com.chandansgowda.audioroom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182481427521-3ph45gmt7pfevgfenoql6rte30m3nc8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlN26dmdgTfblUDuPfLtG2WDwwIwzFQUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182481427521-3ph45gmt7pfevgfenoql6rte30m3nc8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
