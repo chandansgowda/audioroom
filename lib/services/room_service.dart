@@ -11,21 +11,31 @@ class RoomService{
   
   static final db = FirebaseFirestore.instance;
   
-  static Future createRoom({required String name, required String description}) async{
+  static Future createRoom({required String roomName, required String description}) async{
 
+    //TODO: Uncomment this
     //await ApiService.createLkRoom(name: name, metaData: description);
 
     print("Creating Room on Firebase Firestore");
-    await db.collection('rooms').doc(name).set({
-      "name": name,
+    await db.collection('rooms').doc(roomName).set({
+      "name": roomName,
       "token": "tokentobechanged",
       "description": description,
       "total_participants": 99
     }
     );
 
+    print("Adding Current User into Participants collection");
+    //TODO: Replace document email with current user email
+    await db.collection('rooms').doc(roomName).collection('participants').doc('chandan@gmail.com').set({
+      "email":"chandan@gmail.com",
+      "isAdmin": true,
+      "isModerator": true,
+      "isSpeaker": true
+    });
+
     print("Creating room class");
-    Room room = Room(name: name, description: description);
+    Room room = Room(name: roomName, description: description);
 
     Get.back(); // To close the Dialog Box
 

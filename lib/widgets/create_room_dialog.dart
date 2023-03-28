@@ -59,7 +59,7 @@ class _CreateRoomDialogState extends State<CreateRoomDialog> {
                       _isLoading = true;
                     });
                     await RoomService.createRoom(
-                        name: nameController.text,
+                        roomName: nameController.text,
                         description: descriptionController.text);
                   },
                   style:
