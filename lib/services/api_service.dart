@@ -29,10 +29,10 @@ class ApiService{
     print(response.body);
   }
 
-  static Future deleteLkRoom() async{
+  static Future deleteLkRoom(String roomName) async{
     final url = Uri.parse("$lkApiUri/livekit.RoomService/DeleteRoom");
     final token = JwtService().createJwtToken();
-    final requestBody = jsonEncode({"room":"Sample Room Name"});
+    final requestBody = jsonEncode({"room":roomName});
     var response = await http.post(
         url,
         headers: {

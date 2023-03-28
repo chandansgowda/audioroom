@@ -23,7 +23,6 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //TODO: Add API Call to Create Room
           Get.defaultDialog(
               title: 'Enter Room Details',
               titlePadding: EdgeInsets.only(top: 10),
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 8),
         child: StreamBuilder<QuerySnapshot>(
-          stream: db.collection('spaces').snapshots(),
+          stream: db.collection('rooms').snapshots(),
           builder: (ctx, snapshot) {
             if (!snapshot.hasData) {
               return const Center(

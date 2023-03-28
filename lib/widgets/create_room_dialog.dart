@@ -1,5 +1,7 @@
 import 'package:audioroom/services/room_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class CreateRoomDialog extends StatefulWidget {
   @override
@@ -52,11 +54,11 @@ class _CreateRoomDialogState extends State<CreateRoomDialog> {
                   height: 30.0,
                 ),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async{
                     setState(() {
                       _isLoading = true;
                     });
-                    RoomService.createRoom(
+                    await RoomService.createRoom(
                         name: nameController.text,
                         description: descriptionController.text);
                   },

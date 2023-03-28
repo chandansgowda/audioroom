@@ -13,6 +13,11 @@ class SingleRoomScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(room.name, style: TextStyle(fontWeight: FontWeight.w600),),
         backgroundColor: Colors.amber,
+        actions: [
+          IconButton(onPressed: (){
+            RoomService.deleteRoom(roomName: room.name);
+          }, icon: Icon(Icons.delete, color: Colors.red,))
+        ]
       ),
     );
   }
