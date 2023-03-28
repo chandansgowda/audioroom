@@ -1,5 +1,8 @@
+import 'package:audioroom/widgets/create_room_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../widgets/room_list_card.dart';
 
@@ -21,6 +24,11 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //TODO: Add API Call to Create Room
+          Get.defaultDialog(
+              title: 'Enter Room Details',
+              titlePadding: EdgeInsets.only(top: 10),
+              content: CreateRoomDialog(),
+              radius: 10.0);
         },
         child: Icon(Icons.add),
         backgroundColor: Colors.amber,

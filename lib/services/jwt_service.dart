@@ -5,10 +5,12 @@ class JwtService{
   String createJwtToken(){
     final jwt = JWT(
 
-      // Payload
+      // Payload - TODO: This has to be changed for different functions
       {
         "video": {
-          "roomCreate": true
+          "roomCreate": true,
+          "roomAdmin": true,
+          "roomList": true
         }
       },
 

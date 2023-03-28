@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../models/room.dart';
+
 class RoomListCard extends StatelessWidget {
   final String roomName;
   final String roomDescription;
@@ -17,7 +19,8 @@ class RoomListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(SingleRoomScreen());
+        Room room = Room(name: roomName, description: roomDescription);
+        Get.to(SingleRoomScreen(room));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
