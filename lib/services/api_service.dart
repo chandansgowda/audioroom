@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 
 class ApiService{
 
-  static Future createLkRoom({required String name, required String metaData}) async{
+  static Future createLkRoom({required String roomName, required String metaData}) async{
     final url = Uri.parse("$lkApiUri/livekit.RoomService/CreateRoom");
-    final token = JwtService().createJwtToken();
+    final token = JwtService.createJwtToken(roomName);
     final requestBody = jsonEncode({
-      "name": name,
+      "name": roomName,
       "empty_timeout": 300,
       "max_participants": 100,
       "metadata": metaData
@@ -31,7 +31,7 @@ class ApiService{
 
   static Future deleteLkRoom(String roomName) async{
     final url = Uri.parse("$lkApiUri/livekit.RoomService/DeleteRoom");
-    final token = JwtService().createJwtToken();
+    final token = JwtService.createJwtToken(roomName);
     final requestBody = jsonEncode({"room":roomName});
     var response = await http.post(
         url,

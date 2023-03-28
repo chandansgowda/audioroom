@@ -1,5 +1,6 @@
 import 'package:audioroom/screens/home_screen.dart';
 import 'package:audioroom/services/api_service.dart';
+import 'package:audioroom/services/livekit_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,7 +15,7 @@ class RoomService{
   static Future createRoom({required String roomName, required String description}) async{
 
     //TODO: Uncomment this
-    //await ApiService.createLkRoom(name: name, metaData: description);
+    await ApiService.createLkRoom(roomName: roomName, metaData: description);
 
     print("Creating Room on Firebase Firestore");
     await db.collection('rooms').doc(roomName).set({
@@ -35,12 +36,13 @@ class RoomService{
     });
 
     print("Creating room class");
-    Room room = Room(name: roomName, description: description);
+    AudioRoom audioRoom = AudioRoom(name: roomName, description: description);
 
     Get.back(); // To close the Dialog Box
 
-    print("Navigating to Single Room Screen");
-    Get.to(() => SingleRoomScreen(room));
+    print("Connecting to LiveKit Room");
+    LiveKitService.joinLiveKitRoom(audioRoom);
+
   }
 
   static Future deleteRoom({required roomName}) async{

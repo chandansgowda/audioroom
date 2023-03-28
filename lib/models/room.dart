@@ -1,12 +1,12 @@
-class Room {
-  Room({
+class AudioRoom {
+  AudioRoom({
     required this.name,
     required this.description,
   });
   late final String name;
   late final String description;
 
-  Room.fromJson(Map<String, dynamic> json){
+  AudioRoom.fromJson(Map<String, dynamic> json){
     name = json['name'];
     description = json['description'];
   }

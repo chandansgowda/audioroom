@@ -2,7 +2,7 @@ import 'package:audioroom/utils/constants.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class JwtService{
-  String createJwtToken(){
+  static String createJwtToken(String roomName){
     final jwt = JWT(
 
       // Payload - TODO: This has to be changed for different functions
@@ -10,11 +10,17 @@ class JwtService{
         "video": {
           "roomCreate": true,
           "roomAdmin": true,
-          "roomList": true
+          "roomList": true,
+          "canPublish": true,
+          "canPublishData": true,
+          "canSubscribe": true,
+          "room": roomName,
+          "roomJoin": true
         }
       },
 
       issuer: lkApiKey,
+      subject: 'chandan@gmail.com' //TODO: change this to current user email
 
     );
 
