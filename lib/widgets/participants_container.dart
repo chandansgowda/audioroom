@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import '../models/participant.dart';
 
 class ParticipantsContainer extends StatelessWidget {
+
+  late final String roomName;
+  ParticipantsContainer(this.roomName);
+
   final db = FirebaseFirestore.instance;
 
   @override
@@ -15,7 +19,7 @@ class ParticipantsContainer extends StatelessWidget {
       child: StreamBuilder(
           stream: db
               .collection('rooms')
-              .doc('AOSSIE Team Meet')
+              .doc(roomName)
               .collection('participants')
               .snapshots(),
           builder: (ctx, participantSnapshot) {

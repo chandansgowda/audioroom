@@ -1,3 +1,4 @@
+import 'package:audioroom/screens/profile_screen.dart';
 import 'package:audioroom/widgets/create_room_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,11 @@ class HomeScreen extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.amber,
+        actions: [
+          IconButton(onPressed: (){
+            Get.to(UserProfileScreen());
+          }, icon: Icon(Icons.person))
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

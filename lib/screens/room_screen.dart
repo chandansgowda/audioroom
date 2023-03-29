@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:livekit_client/livekit_client.dart';
@@ -30,6 +31,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   bool _isMicOn = false;
 
   final db = FirebaseFirestore.instance;
+  final currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -81,8 +83,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   void _enableMicrophone() async {
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(true);
-      //TODO: Replace email placeholder
-      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc('chandan@gmail.com').update(
+      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc(currentUser!.email).update(
           {"isMicOn": true});
     } catch (error) {
       print('could not enable microphone: $error');
@@ -92,8 +93,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   void _disableMicrophone() async {
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(false);
-      //TODO: Replace email placeholder
-      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc('chandan@gmail.com').update(
+      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc(currentUser!.email).update(
           {"isMicOn": false});
     } catch (error) {
       print('could not disable microphone: $error');
@@ -139,7 +139,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
               Text(widget.audioRoom.name, style: GoogleFonts.poppins(fontSize: 30),textAlign: TextAlign.center,),
               Text(widget.audioRoom.description, style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),textAlign: TextAlign.center,),
               SizedBox(height: 25,),
-              ParticipantsContainer(),
+              ParticipantsContainer(widget.audioRoom.name),
             ],
           ),
         ));

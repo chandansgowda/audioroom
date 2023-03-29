@@ -2,6 +2,7 @@ import 'package:audioroom/screens/home_screen.dart';
 import 'package:audioroom/services/api_service.dart';
 import 'package:audioroom/services/livekit_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,7 @@ import '../models/room.dart';
 class RoomService{
   
   static final db = FirebaseFirestore.instance;
+  static final currentUser = FirebaseAuth.instance.currentUser;
   
   static Future createRoom({required String roomName, required String description}) async{
 
@@ -28,9 +30,8 @@ class RoomService{
     );
 
     print("Adding Current User into Participants collection");
-    //TODO: Replace document email with current user email
-    await db.collection('rooms').doc(roomName).collection('participants').doc('chandan@gmail.com').set({
-      "email":"chandan@gmail.com",
+    await db.collection('rooms').doc(roomName).collection('participants').doc(currentUser!.email).set({
+      "email":currentUser!.email,
       "isAdmin": true,
       "isModerator": true,
       "isSpeaker": true,
@@ -69,9 +70,8 @@ class RoomService{
     );
 
     print("Adding Current User into Participants collection");
-    //TODO: Replace document email with current user email
-    await db.collection('rooms').doc(roomName).collection('participants').doc('chandan@gmail.com').set({
-      "email":"chandan@gmail.com",
+    await db.collection('rooms').doc(roomName).collection('participants').doc(currentUser!.email).set({
+      "email": currentUser!.email,
       "isAdmin": false,
       "isModerator": false,
       "isSpeaker": true,
