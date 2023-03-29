@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:livekit_client/livekit_client.dart';
 
 import '../models/room.dart';
 import '../services/room_service.dart';
+import '../widgets/participants_container.dart';
 
 class SingleRoomScreen extends StatefulWidget {
   final Room room;
@@ -26,6 +28,8 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
 
   EventsListener<RoomEvent> get _listener => widget.listener;
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
+
+  final db = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -75,8 +79,6 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
     });
 
   void _enableMicrophone() async {
-    // final result = await context.showPublishDialog();
-    // if (result != true) return;
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(true);
     } catch (error) {
@@ -85,8 +87,6 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   }
 
   void _disableMicrophone() async {
-    // final result = await context.showPublishDialog();
-    // if (result != true) return;
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(false);
     } catch (error) {
@@ -102,18 +102,23 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-        title: Text(widget.audioRoom.name, style: TextStyle(fontWeight: FontWeight.w600),),
-        backgroundColor: Colors.amber,
-        actions: [
-          IconButton(onPressed: (){
-            RoomService.deleteRoom(roomName: widget.audioRoom.name);
-          }, icon: Icon(Icons.delete, color: Colors.red,))
-        ]
-    ),
-    body: Center(
-      child: Text("Connected"),
-    )
-  );
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Room Name",
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          backgroundColor: Colors.amber,
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.mic),),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: Column(
+          children: [
+            ParticipantsContainer(),
+            
+          ],
+        ));
+  }
 }
+

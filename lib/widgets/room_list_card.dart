@@ -23,7 +23,7 @@ class RoomListCard extends StatelessWidget {
         //TODO: Change back the below calls after testing
         AudioRoom room = AudioRoom(name: roomName, description: roomDescription);
         var r = Room();
-        Get.to(SingleRoomScreen(r, r.createListener(), room));
+        Get.to(() => SingleRoomScreen(r, r.createListener(), room));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
