@@ -32,7 +32,9 @@ class RoomService{
       "email":"chandan@gmail.com",
       "isAdmin": true,
       "isModerator": true,
-      "isSpeaker": true
+      "isSpeaker": true,
+      "isMicOn": false,
+      "isSpeaking": false
     });
 
     print("Creating room class");

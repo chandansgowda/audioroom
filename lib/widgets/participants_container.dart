@@ -10,8 +10,8 @@ class ParticipantsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(10),
       height: MediaQuery.of(context).size.height / 1.5,
-      color: Colors.red,
       child: StreamBuilder(
           stream: db
               .collection('rooms')
@@ -38,6 +38,7 @@ class ParticipantsContainer extends StatelessWidget {
                   crossAxisCount: 3,
                   crossAxisSpacing: 20.0,
                   mainAxisSpacing: 20.0,
+                  childAspectRatio: 2.5/3,
                 ),
                 itemCount: totalParticipants,
                 itemBuilder: ((context, index) {

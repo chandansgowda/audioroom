@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:livekit_client/livekit_client.dart';
 
 import '../models/room.dart';
-import '../services/room_service.dart';
 import '../widgets/participants_container.dart';
 
 class SingleRoomScreen extends StatefulWidget {
@@ -13,21 +13,21 @@ class SingleRoomScreen extends StatefulWidget {
   final AudioRoom audioRoom;
 
   const SingleRoomScreen(
-      this.room,
-      this.listener,
-      this.audioRoom,
-      {
-        Key? key,
-      }) : super(key: key);
+    this.room,
+    this.listener,
+    this.audioRoom, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _SingleRoomScreenState();
 }
 
 class _SingleRoomScreenState extends State<SingleRoomScreen> {
-
   EventsListener<RoomEvent> get _listener => widget.listener;
   bool get fastConnection => widget.room.engine.fastConnectOptions != null;
+
+  bool _isMicOn = false;
 
   final db = FirebaseFirestore.instance;
 
@@ -81,14 +81,20 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
   void _enableMicrophone() async {
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(true);
+      //TODO: Replace email placeholder
+      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc('chandan@gmail.com').update(
+          {"isMicOn": true});
     } catch (error) {
-      print('could not publish audio: $error');
+      print('could not enable microphone: $error');
     }
   }
 
   void _disableMicrophone() async {
     try {
       await widget.room.localParticipant?.setMicrophoneEnabled(false);
+      //TODO: Replace email placeholder
+      await db.collection('rooms').doc(widget.audioRoom.name).collection('participants').doc('chandan@gmail.com').update(
+          {"isMicOn": false});
     } catch (error) {
       print('could not disable microphone: $error');
     }
@@ -98,27 +104,44 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
     _sortParticipants();
   }
 
-  void _sortParticipants() {
-  }
+  void _sortParticipants() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Room Name",
+            "Audio Room",
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: Colors.amber,
+          centerTitle: true,
         ),
-        floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.mic),),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (_isMicOn) {
+              _disableMicrophone();
+            } else {
+              _enableMicrophone();
+            }
+            setState(() {
+              _isMicOn = !_isMicOn;
+            });
+          },
+          backgroundColor: (_isMicOn) ? Colors.lightGreenAccent : Colors.redAccent,
+          child: Icon((_isMicOn) ? Icons.mic : Icons.mic_off_rounded),
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: Column(
-          children: [
-            ParticipantsContainer(),
-            
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(widget.audioRoom.name, style: GoogleFonts.poppins(fontSize: 30),textAlign: TextAlign.center,),
+              Text(widget.audioRoom.description, style: GoogleFonts.poppins(fontSize: 20, color: Colors.grey),textAlign: TextAlign.center,),
+              SizedBox(height: 25,),
+              ParticipantsContainer(),
+            ],
+          ),
         ));
   }
 }
-

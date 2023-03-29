@@ -10,6 +10,13 @@ class ParticipantBlock extends StatelessWidget {
 
   final Participant participant;
 
+  String getUserRole(){
+    if (participant.isAdmin) return "Admin";
+    else if (participant.isModerator) return "Moderator";
+    else if (participant.isSpeaker) return "Speaker";
+    else return "Listener";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,18 +24,27 @@ class ParticipantBlock extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          CircleAvatar(backgroundImage: NetworkImage(participant.dpUrl),radius: 40,),
+          CircleAvatar(
+            backgroundImage: NetworkImage(participant.dpUrl),
+            radius: 30,
+          ),
           Row(
             children: [
               if (participant.isSpeaker)
-                Icon(Icons.mic),
+                Icon(
+                  (participant.isMicOn) ? Icons.mic : Icons.mic_off,
+                  color: (participant.isMicOn)
+                      ? Colors.lightGreenAccent
+                      : Colors.red,
+                ),
               Text(
                 participant.name,
-                style: const TextStyle(
-                    color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: Colors.white, fontSize: 18),
               ),
+
             ],
           ),
+          Text(getUserRole(), style: TextStyle(color: Colors.grey),)
         ],
       ),
     );
