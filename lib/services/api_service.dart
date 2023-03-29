@@ -9,7 +9,7 @@ class ApiService{
 
   static Future createLkRoom({required String roomName, required String metaData}) async{
     final url = Uri.parse("$lkApiUri/livekit.RoomService/CreateRoom");
-    final token = JwtService.createJwtToken(roomName);
+    final token = JwtService.createJwtToken(roomName, isAdmin: true,);
     final requestBody = jsonEncode({
       "name": roomName,
       "empty_timeout": 300,
@@ -29,9 +29,10 @@ class ApiService{
     print(response.body);
   }
 
+
   static Future deleteLkRoom(String roomName) async{
     final url = Uri.parse("$lkApiUri/livekit.RoomService/DeleteRoom");
-    final token = JwtService.createJwtToken(roomName);
+    final token = JwtService.createJwtToken(roomName, isAdmin: true,);
     final requestBody = jsonEncode({"room":roomName});
     var response = await http.post(
         url,

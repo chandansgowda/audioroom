@@ -2,14 +2,14 @@ import 'package:audioroom/utils/constants.dart';
 import 'package:dart_jsonwebtoken/dart_jsonwebtoken.dart';
 
 class JwtService{
-  static String createJwtToken(String roomName){
+  static String createJwtToken(String roomName, {required bool isAdmin}){
     final jwt = JWT(
 
       // Payload - TODO: This has to be changed for different functions
       {
         "video": {
-          "roomCreate": true,
-          "roomAdmin": true,
+          "roomCreate": isAdmin,
+          "roomAdmin": isAdmin,
           "roomList": true,
           "canPublish": true,
           "canPublishData": true,

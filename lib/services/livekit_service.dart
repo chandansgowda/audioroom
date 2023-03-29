@@ -10,7 +10,7 @@ import 'jwt_service.dart';
 
 class LiveKitService{
 
-  static Future<void> joinLiveKitRoom(AudioRoom audioRoom) async {
+  static Future<void> joinLiveKitRoom(AudioRoom audioRoom, {required bool isAdmin}) async {
     //
     try {
 
@@ -20,7 +20,7 @@ class LiveKitService{
       // Create a Listener before connecting
       final listener = room.createListener();
 
-      final lkRoomToken = JwtService.createJwtToken(audioRoom.name);
+      final lkRoomToken = JwtService.createJwtToken(audioRoom.name, isAdmin: isAdmin);
       // Try to connect to the room
       // This will throw an Exception if it fails for any reason.
       await room.connect(
