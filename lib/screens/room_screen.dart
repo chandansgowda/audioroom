@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:audioroom/services/room_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
       widget.room.removeListener(_onRoomDidUpdate);
       await _listener.dispose();
       await widget.room.dispose();
+      await RoomService.leaveRoom(roomName: widget.audioRoom.name);
     })();
     super.dispose();
   }
@@ -116,6 +118,11 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
           ),
           backgroundColor: Colors.amber,
           centerTitle: true,
+          actions: [
+            IconButton(onPressed: (){
+              RoomService.deleteRoom(roomName: widget.audioRoom.name);
+            }, icon: Icon(Icons.delete, color: Colors.black,))
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

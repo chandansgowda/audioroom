@@ -87,4 +87,8 @@ class RoomService{
     print("Connecting to LiveKit Room");
     LiveKitService.joinLiveKitRoom(audioRoom, isAdmin: false);
   }
+
+  static Future leaveRoom({required roomName}) async{
+    await db.collection('rooms').doc(roomName).collection('participants').doc(currentUser!.email).delete();
+  }
 }

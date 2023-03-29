@@ -25,8 +25,12 @@ class ParticipantBlock extends StatelessWidget {
       child: Column(
         children: [
           CircleAvatar(
-            backgroundImage: NetworkImage(participant.dpUrl),
-            radius: 30,
+            radius: 32,
+            backgroundColor: Colors.amber,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(participant.dpUrl),
+              radius: 30,
+            ),
           ),
           Row(
             children: [
