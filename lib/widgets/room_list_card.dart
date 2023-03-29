@@ -2,6 +2,7 @@ import 'package:audioroom/screens/room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:livekit_client/livekit_client.dart';
 
 import '../models/room.dart';
@@ -36,21 +37,23 @@ class RoomListCard extends StatelessWidget {
               ListTile(
                 title: Text(
                   roomName,
-                  style: TextStyle(
+                  style: GoogleFonts.poppins(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w500),
                 ),
-                subtitle: Text(roomDescription, style: TextStyle(
-                  fontStyle: FontStyle.italic
+                subtitle: Text(roomDescription, style: GoogleFonts.poppins(
+                  fontStyle: FontStyle.italic,
+                  color: Colors.black
                 ),),
                 leading: Icon(
                   Icons.multitrack_audio,
-                  color: Colors.green,
+                  color: Colors.black,
+                  size: 40,
                 ),
                 trailing: Text(
                   "$totalParticipants Live",
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
                 ),
               ),
             ],

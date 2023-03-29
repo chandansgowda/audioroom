@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/room_list_card.dart';
 
@@ -15,9 +16,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.menu),
-        title: const Text(
+        title: Text(
           "Available Rooms",
-          style: TextStyle(fontWeight: FontWeight.w600),
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
         backgroundColor: Colors.amber,

@@ -41,9 +41,10 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
     _setUpListeners();
     _sortParticipants();
     WidgetsBindingCompatible.instance?.addPostFrameCallback((_) {
-      if (!fastConnection) {
-        _enableMicrophone();
-      }
+      //TODO: Add post frame callback
+      // if (!fastConnection) {
+      //   _enableMicrophone();
+      // }
     });
   }
 
@@ -114,7 +115,7 @@ class _SingleRoomScreenState extends State<SingleRoomScreen> {
         appBar: AppBar(
           title: Text(
             "Audio Room",
-            style: TextStyle(fontWeight: FontWeight.w600),
+            style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
           ),
           backgroundColor: Colors.amber,
           centerTitle: true,

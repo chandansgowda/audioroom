@@ -33,10 +33,13 @@ class LiveKitService{
               simulcast: false,
             ),
           ),
-          fastConnectOptions:FastConnectOptions(
-            microphone: const TrackOption(enabled: true),
-          )
+          //TODO: Implement Fast Connect If Required
+          // fastConnectOptions:FastConnectOptions(
+          //   microphone: const TrackOption(enabled: false),
+          // )
       );
+
+      Get.back(); // To close the Loading Dialog Box
 
       print("Navigating to Single Room Screen");
       Get.to(() => SingleRoomScreen(room, listener, audioRoom));

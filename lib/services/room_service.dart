@@ -17,8 +17,8 @@ class RoomService{
   
   static Future createRoom({required String roomName, required String description}) async{
 
-    //TODO: Uncomment this after testing
-    //await ApiService.createLkRoom(roomName: roomName, metaData: description);
+    //TODO: Comment this while testing features other than LiveKit to reduce usage
+    await ApiService.createLkRoom(roomName: roomName, metaData: description);
 
     print("Creating Room on Firebase Firestore");
     await db.collection('rooms').doc(roomName).set({
@@ -41,8 +41,6 @@ class RoomService{
 
     print("Creating room class");
     AudioRoom audioRoom = AudioRoom(name: roomName, description: description);
-
-    Get.back(); // To close the Dialog Box
 
     print("Connecting to LiveKit Room");
     LiveKitService.joinLiveKitRoom(audioRoom, isAdmin: true);
@@ -81,8 +79,6 @@ class RoomService{
 
     print("Creating room class");
     AudioRoom audioRoom = AudioRoom(name: roomName, description: description);
-
-    Get.back(); // To close the Dialog Box
 
     print("Connecting to LiveKit Room");
     LiveKitService.joinLiveKitRoom(audioRoom, isAdmin: false);

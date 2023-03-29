@@ -1,6 +1,7 @@
 import 'package:audioroom/models/participant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ParticipantBlock extends StatelessWidget {
   const ParticipantBlock({
@@ -33,6 +34,7 @@ class ParticipantBlock extends StatelessWidget {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (participant.isSpeaker)
                 Icon(
@@ -40,15 +42,16 @@ class ParticipantBlock extends StatelessWidget {
                   color: (participant.isMicOn)
                       ? Colors.lightGreenAccent
                       : Colors.red,
+                  size: 18,
                 ),
               Text(
                 participant.name,
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+                style: GoogleFonts.poppins(color: Colors.white, fontSize: 16),
               ),
 
             ],
           ),
-          Text(getUserRole(), style: TextStyle(color: Colors.grey),)
+          Text(getUserRole(), style: GoogleFonts.poppins(color: Colors.grey),)
         ],
       ),
     );
