@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:get/get.dart';
@@ -32,13 +31,22 @@ class SignInPage extends StatelessWidget {
       subtitleBuilder: (context, action) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
-          child: Text('Please sign in using the provided credentials.'
-          ),
+          child: Text('Please sign in using the provided credentials.'),
         );
+      },
+      footerBuilder: (context, action) {
+        return Container(
+          margin: EdgeInsets.only(top: 20),
+            child: OutlinedButton.icon(
+                onPressed: () {
+                  //Implement Google-Sign-in here
+                  Get.snackbar("Coming soon", "This feature is under development.");
+                }, icon: Icon(Icons.login),
+                label: Text("Sign in With Google")));
       },
       actions: [
         AuthStateChangeAction<SignedIn>((context, _) {
-          Get.to(()=> HomeScreen());
+          Get.to(() => HomeScreen());
         }),
       ],
     );
